@@ -1,4 +1,5 @@
 import { About } from "@/components/About";
+import { Competences } from "@/components/Competences";
 import { Hero } from "@/components/Hero";
 import { Parcours } from "@/components/Parcours";
 import { SelectedWork } from "@/components/SelectedWork";
@@ -10,6 +11,7 @@ export default function Home() {
       <About />
       <SelectedWork />
       <Parcours />
+      <Competences />
     </main>
   );
 }
