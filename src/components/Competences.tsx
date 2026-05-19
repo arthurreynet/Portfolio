@@ -68,7 +68,7 @@ export function Competences() {
             <span className="text-ink-mute">Compétences</span>
           </p>
           <p className="hidden font-mono text-[11px] uppercase tracking-[0.12em] text-ink-faint md:block">
-            Stack &amp; niveau honnête
+            Stack &amp; niveau
           </p>
         </motion.header>
 
