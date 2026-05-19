@@ -1,26 +1,128 @@
 @import "tailwindcss";
 
+/* ─────────────────────────────────────────────
+   Design tokens — OKLCH, warm cream + terracotta
+   ───────────────────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Surfaces — warm off-white, never pure */
+  --bg: oklch(0.97 0.015 85);
+  --bg-elev: oklch(0.95 0.018 85);
+
+  /* Ink — warm near-black, never pure */
+  --ink: oklch(0.22 0.015 50);
+  --ink-mute: oklch(0.45 0.012 50);
+  --ink-faint: oklch(0.62 0.01 50);
+
+  /* Hairline rules / borders */
+  --rule: oklch(0.88 0.012 70);
+  --rule-strong: oklch(0.78 0.012 70);
+
+  /* Accent — terracotta, used sparingly */
+  --accent: oklch(0.55 0.13 38);
+  --accent-soft: oklch(0.55 0.13 38 / 0.12);
+  --accent-deep: oklch(0.45 0.13 38);
+
+  /* Typography stacks (next/font variables resolved by layout) */
+  --font-display-stack: var(--font-fraunces), "Iowan Old Style", "Palatino Linotype", "URW Palladio L", P052, serif;
+  --font-body-stack: var(--font-hanken), -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --font-mono-stack: var(--font-jetbrains), ui-monospace, "SFMono-Regular", Menlo, monospace;
 }
 
+/* Tailwind v4 — expose tokens as utility classes */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Colors */
+  --color-bg: var(--bg);
+  --color-bg-elev: var(--bg-elev);
+  --color-ink: var(--ink);
+  --color-ink-mute: var(--ink-mute);
+  --color-ink-faint: var(--ink-faint);
+  --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-deep: var(--accent-deep);
+
+  /* Font families */
+  --font-display: var(--font-display-stack);
+  --font-body: var(--font-body-stack);
+  --font-mono: var(--font-mono-stack);
+
+  /* Type scale — 1.333 ratio, modular */
+  --text-xs: 0.75rem;        /* 12 */
+  --text-sm: 0.875rem;       /* 14 */
+  --text-base: 1rem;         /* 16 */
+  --text-lg: 1.125rem;       /* 18 */
+  --text-xl: 1.333rem;       /* 21 */
+  --text-2xl: 1.777rem;      /* 28 */
+  --text-3xl: 2.369rem;      /* 38 */
+  --text-4xl: 3.157rem;      /* 51 */
+  --text-5xl: 4.209rem;      /* 67 */
+  --text-6xl: 5.61rem;       /* 90 */
+  --text-display: clamp(2.8rem, 9vw, 7.5rem);
+
+  /* Tracking — tight on display, normal on body, wider on mono caps */
+  --tracking-display: -0.025em;
+  --tracking-mono-caps: 0.08em;
+
+  /* Container */
+  --container-narrow: 64ch;
+  --container-prose: 70ch;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ─────────────────────────────────────────────
+   Base — typography, focus, selection
+   ───────────────────────────────────────────── */
+html {
+  -webkit-text-size-adjust: 100%;
+  font-feature-settings: "kern", "liga", "calt";
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+/* Hairline default for hr */
+hr {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  margin: 0;
+}
+
+/* Editorial drop cap — Fraunces display italic */
+.dropcap::first-letter {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 4.2em;
+  line-height: 0.82;
+  float: left;
+  margin: 0.06em 0.08em 0 -0.04em;
+  color: var(--ink);
+  font-variation-settings: "opsz" 144, "SOFT" 30;
+}
+
+/* Reduced motion — kill all transitions */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
