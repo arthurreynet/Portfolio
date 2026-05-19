@@ -102,6 +102,19 @@ hr {
   margin: 0;
 }
 
+/* Editorial drop cap — Fraunces display italic */
+.dropcap::first-letter {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 4.2em;
+  line-height: 0.82;
+  float: left;
+  margin: 0.06em 0.08em 0 -0.04em;
+  color: var(--ink);
+  font-variation-settings: "opsz" 144, "SOFT" 30;
+}
+
 /* Reduced motion — kill all transitions */
 @media (prefers-reduced-motion: reduce) {
   *,
