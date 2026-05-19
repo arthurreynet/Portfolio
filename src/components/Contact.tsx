@@ -27,7 +27,7 @@ export function Contact() {
     if (!FORMSPREE_ID) {
       setStatus("error");
       setError(
-        `Formulaire non configuré. Écris-moi directement à ${EMAIL}.`,
+        `Formulaire non configuré. Écrivez-moi directement à ${EMAIL}.`,
       );
       return;
     }
@@ -50,12 +50,12 @@ export function Contact() {
         };
         setStatus("error");
         setError(
-          data?.error ?? "Une erreur est survenue. Réessaie ou écris-moi directement.",
+          data?.error ?? "Une erreur est survenue. Réessayez ou écrivez-moi directement.",
         );
       }
     } catch {
       setStatus("error");
-      setError("Connexion impossible. Réessaie ou écris-moi directement.");
+      setError("Connexion impossible. Réessayez ou écrivez-moi directement.");
     }
   }
 
@@ -67,7 +67,7 @@ export function Contact() {
       id="contact"
       className="relative px-6 py-20 md:px-12 md:py-32 scroll-mt-12"
     >
-      <SectionWatermark>06</SectionWatermark>
+      <SectionWatermark>05</SectionWatermark>
       <div className="relative z-10 mx-auto max-w-6xl">
         <motion.header
           initial={reduce ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
@@ -77,7 +77,7 @@ export function Contact() {
           className="flex items-baseline justify-between border-b border-rule pb-6"
         >
           <p className="font-mono text-xs uppercase tracking-[0.12em]">
-            <span className="text-accent">06</span>{" "}
+            <span className="text-accent">05</span>{" "}
             <span className="text-ink-faint">—</span>{" "}
             <span className="text-ink-mute">Contact</span>
           </p>
@@ -107,7 +107,7 @@ export function Contact() {
             ou un poste.
           </h2>
           <p className="mt-8 max-w-xl text-base leading-relaxed text-ink-mute md:text-lg">
-            Décris-moi ton projet ou ton besoin en quelques lignes. Je
+            Décrivez-moi votre projet ou votre besoin en quelques lignes. Je
             réponds sous 48h.
           </p>
         </motion.div>
