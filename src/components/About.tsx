@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion, type Transition } from "motion/react";
+import { SectionWatermark } from "./SectionWatermark";
 
 const EASE: Transition["ease"] = [0.2, 0, 0.2, 1];
 
@@ -17,9 +18,10 @@ export function About() {
   return (
     <section
       id="a-propos"
-      className="px-6 py-32 md:px-12 md:py-48 scroll-mt-12"
+      className="relative px-6 py-20 md:px-12 md:py-32 scroll-mt-12"
     >
-      <div className="mx-auto max-w-6xl">
+      <SectionWatermark>01</SectionWatermark>
+      <div className="relative z-10 mx-auto max-w-6xl">
         <div className="grid gap-12 md:grid-cols-12 md:gap-x-16">
           {/* Sticky section label */}
           <motion.aside

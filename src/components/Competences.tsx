@@ -1,0 +1,115 @@
+"use client";
+
+import { motion, useReducedMotion, type Transition } from "motion/react";
+import { SectionWatermark } from "./SectionWatermark";
+
+const EASE: Transition["ease"] = [0.2, 0, 0.2, 1];
+
+type Column = {
+  label: string;
+  caption: string;
+  items: string[];
+  accent?: boolean;
+};
+
+const COLUMNS: Column[] = [
+  {
+    label: "Au quotidien",
+    caption: "Stack principale, prod réelle",
+    accent: true,
+    items: [
+      "React",
+      "Next.js",
+      "TypeScript",
+      "Tailwind",
+      "C# / .NET 8",
+      "Git",
+    ],
+  },
+  {
+    label: "Bon niveau",
+    caption: "Confortable, déjà livré",
+    items: [
+      "MUI",
+      "Node.js",
+      "PostgreSQL",
+      "SQL Server",
+      "Oracle",
+      "Docker",
+    ],
+  },
+  {
+    label: "En exploration",
+    caption: "En cours d'apprentissage",
+    items: ["CI/CD avancé", "Self-hosting"],
+  },
+];
+
+export function Competences() {
+  const reduce = useReducedMotion();
+
+  return (
+    <section
+      id="competences"
+      className="relative px-6 py-20 md:px-12 md:py-32 scroll-mt-12"
+    >
+      <SectionWatermark>04</SectionWatermark>
+      <div className="relative z-10 mx-auto max-w-6xl">
+        <motion.header
+          initial={reduce ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.6, ease: EASE }}
+          className="mb-12 flex items-baseline justify-between border-b border-rule pb-6 md:mb-16"
+        >
+          <p className="font-mono text-xs uppercase tracking-[0.12em]">
+            <span className="text-accent">04</span>{" "}
+            <span className="text-ink-faint">—</span>{" "}
+            <span className="text-ink-mute">Compétences</span>
+          </p>
+          <p className="hidden font-mono text-[11px] uppercase tracking-[0.12em] text-ink-faint md:block">
+            Stack &amp; niveau honnête
+          </p>
+        </motion.header>
+
+        <div className="grid gap-12 md:grid-cols-3 md:gap-16">
+          {COLUMNS.map((column, colIndex) => (
+            <motion.div
+              key={column.label}
+              initial={
+                reduce ? { opacity: 1, y: 0 } : { opacity: 0, y: 14 }
+              }
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{
+                duration: 0.6,
+                delay: colIndex * 0.1,
+                ease: EASE,
+              }}
+            >
+              <h3 className="font-mono text-[11px] uppercase tracking-[0.12em] md:text-xs">
+                <span className={column.accent ? "text-accent" : "text-ink"}>
+                  {column.label}
+                </span>
+              </h3>
+              <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.12em] text-ink-faint md:text-[11px]">
+                {column.caption}
+              </p>
+              <div className="mt-6 border-t border-rule-strong" />
+              <ul className="mt-4 space-y-3 text-base text-ink md:text-lg">
+                {column.items.map((item) => (
+                  <li
+                    key={item}
+                    className="font-display leading-tight tracking-tight"
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
