@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { motion, useReducedMotion, type Transition } from "motion/react";
+import { SectionWatermark } from "./SectionWatermark";
 
 const EASE: Transition["ease"] = [0.2, 0, 0.2, 1];
 
@@ -64,9 +65,10 @@ export function Contact() {
   return (
     <section
       id="contact"
-      className="px-6 py-32 md:px-12 md:py-48 scroll-mt-12"
+      className="relative px-6 py-20 md:px-12 md:py-32 scroll-mt-12"
     >
-      <div className="mx-auto max-w-6xl">
+      <SectionWatermark>06</SectionWatermark>
+      <div className="relative z-10 mx-auto max-w-6xl">
         <motion.header
           initial={reduce ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}

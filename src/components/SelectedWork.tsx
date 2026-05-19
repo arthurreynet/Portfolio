@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion, type Transition } from "motion/react";
+import { SectionWatermark } from "./SectionWatermark";
 
 const EASE: Transition["ease"] = [0.2, 0, 0.2, 1];
 
@@ -125,9 +126,10 @@ export function SelectedWork() {
   return (
     <section
       id="travaux"
-      className="px-6 py-32 md:px-12 md:py-48 scroll-mt-12"
+      className="relative px-6 py-20 md:px-12 md:py-32 scroll-mt-12"
     >
-      <div className="mx-auto max-w-6xl">
+      <SectionWatermark>02</SectionWatermark>
+      <div className="relative z-10 mx-auto max-w-6xl">
         {/* Section header */}
         <motion.header
           initial={reduce ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}

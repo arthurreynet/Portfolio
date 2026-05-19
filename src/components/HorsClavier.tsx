@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion, type Transition } from "motion/react";
+import { SectionWatermark } from "./SectionWatermark";
 
 const EASE: Transition["ease"] = [0.2, 0, 0.2, 1];
 
@@ -12,9 +13,10 @@ export function HorsClavier() {
   return (
     <section
       id="hors-clavier"
-      className="px-6 py-32 md:px-12 md:py-48 scroll-mt-12"
+      className="relative px-6 py-20 md:px-12 md:py-32 scroll-mt-12"
     >
-      <div className="mx-auto max-w-6xl">
+      <SectionWatermark>05</SectionWatermark>
+      <div className="relative z-10 mx-auto max-w-6xl">
         <motion.header
           initial={reduce ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -37,7 +39,7 @@ export function HorsClavier() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.7, delay: 0.1, ease: EASE }}
-          className="py-20 md:py-32"
+          className="py-12 md:py-20"
         >
           <p className="flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-sm uppercase tracking-[0.14em] text-ink md:text-base">
             {INTERESTS.map((item, i) => (
