@@ -45,7 +45,7 @@ const PROJECTS: Project[] = [
     title: "Regex Playground",
     description:
       "Outil web pour tester, expliquer et documenter des expressions régulières. Surlignage des matches en temps réel, explication pas à pas du pattern, partage par URL.",
-    image: "https://regex-playground-one.vercel.app/og.png",
+    image: "/projets/regex-playground.png",
     imageNote: "Aperçu à venir",
     liveUrl: "https://regex-playground-one.vercel.app",
     repoUrl: "https://github.com/arthurreynet/Regex-Playground",
