@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+import { useState } from "react";
 import { motion, useReducedMotion, type Transition } from "motion/react";
 import { SectionWatermark } from "./SectionWatermark";
 
@@ -13,6 +15,8 @@ type Project = {
   stack: string | null;
   title: string;
   description: string;
+  image: string | null;
+  imageNote: string;
 };
 
 const PROJECTS: Project[] = [
@@ -25,6 +29,8 @@ const PROJECTS: Project[] = [
     title: "Migration d'un portail client B2B",
     description:
       "Refonte d'un portail B2B en production dans le secteur logistique. Migration complète de la stack legacy vers Next.js et .NET 8, montées de version majeures (React 18 → 19, Next 14 → 16, MUI 5 → 7), gains de perf et de maintenabilité. Du front à l'infra.",
+    image: null,
+    imageNote: "Visuel anonymisé",
   },
   {
     number: "02",
@@ -35,6 +41,8 @@ const PROJECTS: Project[] = [
     title: "Regex Playground",
     description:
       "Outil web pour tester, expliquer et documenter des expressions régulières. Surlignage des matches en temps réel, explication pas à pas du pattern, partage par URL.",
+    image: "/projets/regex-playground.png",
+    imageNote: "Capture à venir",
   },
   {
     number: "03",
@@ -45,6 +53,8 @@ const PROJECTS: Project[] = [
     title: "Habit Tracker",
     description:
       "Suivi d'habitudes minimaliste avec visualisation type contribution graph. Sans compte requis, synchro multi-device. Stack visée : Next.js + SQLite.",
+    image: null,
+    imageNote: "En préparation",
   },
   {
     number: "04",
@@ -55,8 +65,36 @@ const PROJECTS: Project[] = [
     title: "Freelance Tracker",
     description:
       "Application fullstack de suivi de missions freelance : facturation, dépenses, déclarations URSSAF, dashboard temps. Stack visée : Next.js + .NET 8 + PostgreSQL.",
+    image: null,
+    imageNote: "En préparation",
   },
 ];
+
+function ProjectThumbnail({ project }: { project: Project }) {
+  const [imgError, setImgError] = useState(false);
+  const showImage = project.image && !imgError;
+
+  return (
+    <div className="relative aspect-[16/10] w-full overflow-hidden border border-rule bg-bg-elev">
+      {showImage ? (
+        <Image
+          src={project.image as string}
+          alt={`Aperçu du projet ${project.title}`}
+          fill
+          sizes="(min-width: 768px) 40vw, 100vw"
+          className="object-cover"
+          onError={() => setImgError(true)}
+        />
+      ) : (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <p className="text-center font-mono text-[11px] uppercase tracking-[0.14em] text-ink-faint">
+            {project.imageNote}
+          </p>
+        </div>
+      )}
+    </div>
+  );
+}
 
 function ProjectRow({ project, index }: { project: Project; index: number }) {
   const reduce = useReducedMotion();
@@ -66,18 +104,14 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
       initial={reduce ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
-      transition={{
-        duration: 0.6,
-        delay: index * 0.08,
-        ease: EASE,
-      }}
-      className="group border-t border-rule"
+      transition={{ duration: 0.6, delay: index * 0.08, ease: EASE }}
+      className="border-t border-rule py-10 md:py-14"
     >
-      <article className="py-10 transition-colors md:py-14">
-        {/* Metadata strip */}
-        <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 font-mono text-[11px] uppercase tracking-[0.12em] text-ink-mute md:text-xs">
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-            <span className="text-ink-faint tabular-nums">
+      <article className="grid gap-6 md:grid-cols-12 md:gap-10">
+        {/* Text */}
+        <div className="md:col-span-7">
+          <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 font-mono text-[11px] uppercase tracking-[0.12em] text-ink-mute md:text-xs">
+            <span className="tabular-nums text-ink-faint">
               {project.number}
             </span>
             <span className="text-ink-faint" aria-hidden>
@@ -95,25 +129,25 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
               {project.statusLabel}
             </span>
           </div>
+
+          <h3 className="mt-4 font-display font-medium leading-[1.0] text-ink text-[clamp(1.9rem,4.5vw,3.5rem)]">
+            {project.title}
+          </h3>
+
+          <p className="mt-5 max-w-xl text-base leading-relaxed text-ink-mute md:text-lg">
+            {project.description}
+          </p>
+
           {project.stack && (
-            <span className="text-ink-faint">{project.stack}</span>
+            <p className="mt-5 font-mono text-[11px] uppercase tracking-[0.12em] text-ink-faint md:text-xs">
+              {project.stack}
+            </p>
           )}
         </div>
 
-        {/* Title */}
-        <h3 className="mt-5 font-display font-medium leading-[0.98] text-ink text-[clamp(2rem,5.5vw,4.5rem)]">
-          {project.title}
-        </h3>
-
-        {/* Description — always visible on mobile (touch, no hover), hover-deploy on desktop */}
-        <div
-          className="grid grid-rows-[1fr] transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.2,0,0.2,1)] md:grid-rows-[0fr] md:group-hover:grid-rows-[1fr] md:group-focus-within:grid-rows-[1fr]"
-        >
-          <div className="overflow-hidden">
-            <p className="mt-6 max-w-2xl text-base leading-relaxed text-ink-mute md:text-lg">
-              {project.description}
-            </p>
-          </div>
+        {/* Thumbnail */}
+        <div className="md:col-span-5 md:col-start-8">
+          <ProjectThumbnail project={project} />
         </div>
       </article>
     </motion.li>
@@ -151,16 +185,12 @@ export function SelectedWork() {
         {/* Project list */}
         <ul>
           {PROJECTS.map((project, index) => (
-            <ProjectRow
-              key={project.number}
-              project={project}
-              index={index}
-            />
+            <ProjectRow key={project.number} project={project} index={index} />
           ))}
         </ul>
 
         {/* Closing rule */}
-        <div className="mt-0 border-t border-rule" />
+        <div className="border-t border-rule" />
       </div>
     </section>
   );
