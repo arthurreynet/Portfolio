@@ -64,6 +64,7 @@ export function Contact() {
   return (
     <section
       id="contact"
+      aria-labelledby="contact-title"
       className="px-6 py-20 md:px-12 md:py-32 scroll-mt-12"
     >
       <div className="mx-auto max-w-6xl">
@@ -74,11 +75,18 @@ export function Contact() {
           transition={{ duration: 0.6, ease: EASE }}
           className="flex items-baseline justify-between border-b border-rule pb-6"
         >
-          <p className="font-mono text-xs uppercase tracking-[0.12em]">
-            <span className="text-accent">05</span>{" "}
-            <span className="text-ink-faint">—</span>{" "}
+          <h2
+            id="contact-title"
+            className="font-mono text-xs uppercase tracking-[0.12em]"
+          >
+            <span className="text-accent" aria-hidden>
+              05
+            </span>{" "}
+            <span className="text-ink-faint" aria-hidden>
+              —
+            </span>{" "}
             <span className="text-ink-mute">Contact</span>
-          </p>
+          </h2>
           <p className="hidden font-mono text-[11px] uppercase tracking-[0.12em] text-ink-faint md:block">
             Discuter / écrire
           </p>
@@ -92,7 +100,7 @@ export function Contact() {
           transition={{ duration: 0.7, delay: 0.1, ease: EASE }}
           className="mt-16 md:mt-24"
         >
-          <h2
+          <p
             className="font-display font-medium leading-[0.95] text-ink"
             style={{
               fontSize: "clamp(2.2rem, 6vw, 5.5rem)",
@@ -103,7 +111,7 @@ export function Contact() {
             Disponible pour une mission
             <br />
             ou un poste.
-          </h2>
+          </p>
           <p className="mt-8 max-w-xl text-base leading-relaxed text-ink-mute md:text-lg">
             Décrivez-moi votre projet ou votre besoin en quelques lignes. Je
             réponds sous 48h.

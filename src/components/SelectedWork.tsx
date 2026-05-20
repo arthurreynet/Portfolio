@@ -226,6 +226,7 @@ export function SelectedWork() {
   return (
     <section
       id="travaux"
+      aria-labelledby="travaux-title"
       className="px-6 py-20 md:px-12 md:py-32 scroll-mt-12"
     >
       <div className="mx-auto max-w-6xl">
@@ -237,11 +238,18 @@ export function SelectedWork() {
           transition={{ duration: 0.6, ease: EASE }}
           className="mb-12 flex items-baseline justify-between border-b border-rule pb-6 md:mb-16"
         >
-          <p className="font-mono text-xs uppercase tracking-[0.12em]">
-            <span className="text-accent">02</span>{" "}
-            <span className="text-ink-faint">—</span>{" "}
+          <h2
+            id="travaux-title"
+            className="font-mono text-xs uppercase tracking-[0.12em]"
+          >
+            <span className="text-accent" aria-hidden>
+              02
+            </span>{" "}
+            <span className="text-ink-faint" aria-hidden>
+              —
+            </span>{" "}
             <span className="text-ink-mute">Travaux</span>
-          </p>
+          </h2>
           <p className="hidden font-mono text-[11px] uppercase tracking-[0.12em] text-ink-faint md:block">
             Sélection · 4 entrées
           </p>
