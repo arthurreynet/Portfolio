@@ -1,14 +1,19 @@
 "use client";
 
-import Image from "next/image";
-import { useState } from "react";
 import { motion, useReducedMotion, type Transition } from "motion/react";
 
 const EASE: Transition["ease"] = [0.2, 0, 0.2, 1];
 
+const FACTS: { label: string; value: string }[] = [
+  { label: "Rôle", value: "Développeur full-stack" },
+  { label: "Stack", value: "Next.js · .NET 8" },
+  { label: "Formation", value: "Bachelor CDA — CESI Rouen" },
+  { label: "Basé à", value: "Rouen, France" },
+  { label: "Langues", value: "Français · Anglais technique" },
+];
+
 export function Hero() {
   const reduce = useReducedMotion();
-  const [imgError, setImgError] = useState(false);
 
   const rise = (delay: number) => ({
     initial: reduce ? { opacity: 1, y: 0 } : { opacity: 0, y: 14 },
@@ -32,10 +37,10 @@ export function Hero() {
         </span>
       </motion.header>
 
-      {/* Hero masthead — text left, portrait right on desktop */}
-      <div className="mx-auto grid w-full max-w-6xl flex-1 grid-cols-1 items-center gap-10 pt-16 md:grid-cols-12 md:gap-12 md:pt-24">
+      {/* Hero masthead — text left, fact index right */}
+      <div className="mx-auto grid w-full max-w-6xl flex-1 grid-cols-1 items-center gap-12 pt-16 lg:grid-cols-12 lg:gap-16 lg:pt-24">
         {/* Text column */}
-        <div className="md:col-span-7">
+        <div className="lg:col-span-7">
           <motion.h1
             {...rise(0.2)}
             className="font-display font-medium leading-[0.92] text-ink"
@@ -65,35 +70,21 @@ export function Hero() {
           </motion.p>
         </div>
 
-        {/* Portrait column */}
-        <motion.figure
-          {...rise(0.3)}
-          className="md:col-span-5 md:col-start-8"
+        {/* Fact index — editorial masthead */}
+        <motion.dl
+          {...rise(0.45)}
+          className="max-w-md lg:col-span-4 lg:col-start-9 lg:max-w-none"
         >
-          <div className="relative aspect-[3/4] w-full max-w-sm overflow-hidden border border-rule-strong bg-bg-elev md:ml-auto">
-            {!imgError ? (
-              <Image
-                src="/portrait.jpg"
-                alt="Portrait d'Arthur Reynet"
-                fill
-                sizes="(min-width: 768px) 33vw, 100vw"
-                className="object-cover"
-                priority
-                onError={() => setImgError(true)}
-              />
-            ) : (
-              <div className="absolute inset-0 flex items-center justify-center">
-                <p className="text-center font-mono text-[11px] uppercase tracking-[0.14em] text-ink-faint">
-                  Portrait
-                  <br />à venir
-                </p>
-              </div>
-            )}
-          </div>
-          <figcaption className="mt-4 font-mono text-[11px] uppercase tracking-[0.12em] text-ink-mute md:ml-auto md:max-w-sm md:text-right md:text-xs">
-            Rouen · 2026
-          </figcaption>
-        </motion.figure>
+          {FACTS.map((fact) => (
+            <div
+              key={fact.label}
+              className="grid grid-cols-[6rem_1fr] items-baseline gap-3 border-t border-rule py-3 font-mono text-[11px] uppercase tracking-[0.12em]"
+            >
+              <dt className="text-ink-faint">{fact.label}</dt>
+              <dd className="text-ink">{fact.value}</dd>
+            </div>
+          ))}
+        </motion.dl>
       </div>
 
       {/* Bottom scroll cue */}
