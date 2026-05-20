@@ -24,6 +24,7 @@ export function Hero() {
   return (
     <section
       id="hero"
+      aria-labelledby="hero-title"
       className="flex min-h-screen flex-col px-6 py-8 md:px-12 md:py-10"
     >
       {/* Top editorial strip */}
@@ -43,6 +44,7 @@ export function Hero() {
         <div className="lg:col-span-7">
           <motion.h1
             {...rise(0.2)}
+            id="hero-title"
             className="font-display font-medium leading-[0.92] text-ink"
             style={{
               fontSize: "var(--text-display)",
@@ -88,7 +90,7 @@ export function Hero() {
       </div>
 
       {/* Bottom scroll cue */}
-      <motion.footer
+      <motion.div
         {...rise(0.75)}
         className="flex items-center justify-between border-t border-rule pt-4 font-mono text-[11px] uppercase tracking-[0.12em] text-ink-mute md:text-xs"
       >
@@ -105,7 +107,7 @@ export function Hero() {
           Continuer
         </a>
         <span>Rouen, FR</span>
-      </motion.footer>
+      </motion.div>
     </section>
   );
 }

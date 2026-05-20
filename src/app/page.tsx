@@ -10,7 +10,7 @@ import { SelectedWork } from "@/components/SelectedWork";
 export default function Home() {
   return (
     <>
-      <main>
+      <main id="contenu">
         <Hero />
         <About />
         <SelectedWork />

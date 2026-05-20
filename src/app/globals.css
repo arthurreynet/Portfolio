@@ -11,7 +11,7 @@
   /* Ink — warm near-black, never pure */
   --ink: oklch(0.22 0.015 50);
   --ink-mute: oklch(0.45 0.012 50);
-  --ink-faint: oklch(0.62 0.01 50);
+  --ink-faint: oklch(0.52 0.012 50);
 
   /* Hairline rules / borders */
   --rule: oklch(0.88 0.012 70);
