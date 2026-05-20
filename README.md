@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio — Arthur Reynet
 
-## Getting Started
+Portfolio personnel de développeur full-stack. Direction artistique éditoriale : typographie forte, grille asymétrique, palette crème + terracotta, retenue dans le motion. Pensé pour mener par la preuve (projets, expérience réelle) auprès de recruteurs et de porteurs de projet freelance.
 
-First, run the development server:
+**Live** : _à venir_ (déploiement Vercel)
+
+## Aperçu
+
+<!-- TODO : ajouter une capture ou un GIF de démo (ex: scroll de la home + le mini-jeu du footer) -->
+
+## Stack
+
+- **Next.js 16** (App Router) + **TypeScript**
+- **Tailwind CSS v4** — design tokens en OKLCH (variables CSS + `@theme`)
+- **Motion** — révélations en cascade, états de survol sobres
+- **next/font** — Fraunces (display), Hanken Grotesk (corps), JetBrains Mono (métadonnées), self-hostées
+- **Formspree** — formulaire de contact sans backend
+- Déploiement **Vercel**
+
+## Caractéristiques
+
+- **Design éditorial** sans template : Hero masthead, grille 12 colonnes, hairlines, beaucoup de blanc chaud
+- **Sections** : Hero · 01 À propos · 02 Travaux (vignettes OG + liens live/repo) · 03 Parcours · 04 Compétences · 05 Contact
+- **Accessibilité** : contraste WCAG AA, hiérarchie de titres, landmarks ARIA, skip-link, navigation clavier, `prefers-reduced-motion`
+- **SEO** : metadata complète, OG image générée à la volée, JSON-LD Person, `sitemap.xml`, `robots.txt`
+- **Easter egg** : le jeu du dinosaure de Chrome, version maison, dans le footer
+- 100 % statique, optimisé pour Lighthouse 95+
+
+## Développement local
+
+Prérequis : **Node ≥ 20.9** (voir `.nvmrc`).
 
 ```bash
+nvm use
+npm install
+cp .env.example .env.local   # renseigner les variables ci-dessous
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Le site tourne sur http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Variables d'environnement (`.env.local`)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Variable | Rôle |
+|---|---|
+| `NEXT_PUBLIC_SITE_URL` | URL de production (metadataBase, canonical, OG, sitemap). Fallback : `https://arthurreynet.com` |
+| `NEXT_PUBLIC_FORMSPREE_ID` | ID du formulaire Formspree pour la section Contact |
 
-## Learn More
+## Scripts
 
-To learn more about Next.js, take a look at the following resources:
+| Commande | Action |
+|---|---|
+| `npm run dev` | Serveur de développement |
+| `npm run build` | Build de production |
+| `npm run start` | Serveur de production |
+| `npm run lint` | ESLint |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+src/
+├─ app/
+│  ├─ layout.tsx           Metadata, fonts, JSON-LD, skip-link
+│  ├─ page.tsx             Composition de la home
+│  ├─ globals.css          Design tokens OKLCH + base styles
+│  ├─ opengraph-image.tsx  Carte OG 1200×630 générée
+│  ├─ icon.tsx             Favicon monogramme
+│  ├─ sitemap.ts / robots.ts
+└─ components/             Hero, About, SelectedWork, Parcours,
+                           Competences, Contact, Footer, DinoGame…
+public/projets/            Visuels des projets
+```
 
-## Deploy on Vercel
+## Déploiement
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Pousser sur GitHub (fait).
+2. Importer le repo sur [Vercel](https://vercel.com/new).
+3. Définir les variables d'environnement (`NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_FORMSPREE_ID`).
+4. Déployer — Vercel détecte Next.js automatiquement.
