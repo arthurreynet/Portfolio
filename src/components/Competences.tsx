@@ -1,14 +1,31 @@
 "use client";
 
 import { motion, useReducedMotion, type Transition } from "motion/react";
+import {
+  Atom,
+  Braces,
+  Component,
+  Container,
+  Database,
+  GitBranch,
+  Hash,
+  Hexagon,
+  Server,
+  Triangle,
+  Wind,
+  Workflow,
+  type LucideIcon,
+} from "lucide-react";
 import { SectionWatermark } from "./SectionWatermark";
 
 const EASE: Transition["ease"] = [0.2, 0, 0.2, 1];
 
+type Skill = { name: string; icon: LucideIcon };
+
 type Column = {
   label: string;
   caption: string;
-  items: string[];
+  items: Skill[];
   accent?: boolean;
 };
 
@@ -18,30 +35,33 @@ const COLUMNS: Column[] = [
     caption: "Stack principale, prod réelle",
     accent: true,
     items: [
-      "React",
-      "Next.js",
-      "TypeScript",
-      "Tailwind",
-      "C# / .NET 8",
-      "Git",
+      { name: "React", icon: Atom },
+      { name: "Next.js", icon: Triangle },
+      { name: "TypeScript", icon: Braces },
+      { name: "Tailwind", icon: Wind },
+      { name: "C# / .NET 8", icon: Hash },
+      { name: "Git", icon: GitBranch },
     ],
   },
   {
     label: "Bon niveau",
     caption: "Confortable, déjà livré",
     items: [
-      "MUI",
-      "Node.js",
-      "PostgreSQL",
-      "SQL Server",
-      "Oracle",
-      "Docker",
+      { name: "MUI", icon: Component },
+      { name: "Node.js", icon: Hexagon },
+      { name: "PostgreSQL", icon: Database },
+      { name: "SQL Server", icon: Database },
+      { name: "Oracle", icon: Database },
+      { name: "Docker", icon: Container },
     ],
   },
   {
     label: "En exploration",
     caption: "En cours d'apprentissage",
-    items: ["CI/CD avancé", "Self-hosting"],
+    items: [
+      { name: "CI/CD avancé", icon: Workflow },
+      { name: "Self-hosting", icon: Server },
+    ],
   },
 ];
 
@@ -97,14 +117,21 @@ export function Competences() {
               </p>
               <div className="mt-6 border-t border-rule-strong" />
               <ul className="mt-4 space-y-3 text-base text-ink md:text-lg">
-                {column.items.map((item) => (
-                  <li
-                    key={item}
-                    className="font-display leading-tight tracking-tight"
-                  >
-                    {item}
-                  </li>
-                ))}
+                {column.items.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <li key={item.name} className="flex items-center gap-3">
+                      <Icon
+                        className="size-[18px] shrink-0 text-ink-faint"
+                        strokeWidth={1.5}
+                        aria-hidden
+                      />
+                      <span className="font-display leading-tight tracking-tight">
+                        {item.name}
+                      </span>
+                    </li>
+                  );
+                })}
               </ul>
             </motion.div>
           ))}
