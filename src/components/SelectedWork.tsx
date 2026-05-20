@@ -17,6 +17,8 @@ type Project = {
   description: string;
   image: string | null;
   imageNote: string;
+  liveUrl: string | null;
+  repoUrl: string | null;
 };
 
 const PROJECTS: Project[] = [
@@ -31,6 +33,8 @@ const PROJECTS: Project[] = [
       "Refonte d'un portail client en production dans le secteur logistique (commandes B2B et B2C). Migration complète de la stack legacy vers Next.js et .NET 8, montées de version majeures (React 18 → 19, Next 14 → 16, MUI 5 → 7), gains de perf et de maintenabilité. Du front à l'infra.",
     image: null,
     imageNote: "Visuel anonymisé",
+    liveUrl: null,
+    repoUrl: null,
   },
   {
     number: "02",
@@ -41,8 +45,10 @@ const PROJECTS: Project[] = [
     title: "Regex Playground",
     description:
       "Outil web pour tester, expliquer et documenter des expressions régulières. Surlignage des matches en temps réel, explication pas à pas du pattern, partage par URL.",
-    image: "/projets/regex-playground.png",
-    imageNote: "Capture à venir",
+    image: "https://regex-playground-one.vercel.app/og.png",
+    imageNote: "Aperçu à venir",
+    liveUrl: "https://regex-playground-one.vercel.app",
+    repoUrl: "https://github.com/arthurreynet/Regex-Playground",
   },
   {
     number: "03",
@@ -55,6 +61,8 @@ const PROJECTS: Project[] = [
       "Suivi d'habitudes minimaliste avec visualisation type contribution graph. Sans compte requis, synchro multi-device. Stack visée : Next.js + SQLite.",
     image: null,
     imageNote: "En préparation",
+    liveUrl: null,
+    repoUrl: null,
   },
   {
     number: "04",
@@ -67,6 +75,8 @@ const PROJECTS: Project[] = [
       "Application fullstack de suivi de missions freelance : facturation, dépenses, déclarations URSSAF, dashboard temps. Stack visée : Next.js + .NET 8 + PostgreSQL.",
     image: null,
     imageNote: "En préparation",
+    liveUrl: null,
+    repoUrl: null,
   },
 ];
 
@@ -74,23 +84,78 @@ function ProjectThumbnail({ project }: { project: Project }) {
   const [imgError, setImgError] = useState(false);
   const showImage = project.image && !imgError;
 
+  const inner = showImage ? (
+    <Image
+      src={project.image as string}
+      alt={`Aperçu du projet ${project.title}`}
+      fill
+      sizes="(min-width: 768px) 40vw, 100vw"
+      className="object-cover"
+      onError={() => setImgError(true)}
+    />
+  ) : (
+    <div className="absolute inset-0 flex items-center justify-center">
+      <p className="text-center font-mono text-[11px] uppercase tracking-[0.14em] text-ink-faint">
+        {project.imageNote}
+      </p>
+    </div>
+  );
+
+  const frame =
+    "relative block aspect-[1200/630] w-full overflow-hidden border border-rule bg-bg-elev";
+
+  if (project.liveUrl) {
+    return (
+      <a
+        href={project.liveUrl}
+        target="_blank"
+        rel="noreferrer"
+        aria-label={`Ouvrir ${project.title} dans un nouvel onglet`}
+        className={`${frame} group/thumb transition-colors hover:border-accent focus-visible:border-accent`}
+      >
+        {inner}
+      </a>
+    );
+  }
+
+  return <div className={frame}>{inner}</div>;
+}
+
+function ProjectLinks({ project }: { project: Project }) {
+  if (!project.liveUrl && !project.repoUrl) return null;
+
+  const linkClass =
+    "group/link inline-flex items-center gap-1.5 text-ink transition-colors hover:text-accent focus-visible:text-accent";
+  const arrow =
+    "inline-block transition-transform duration-300 group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5";
+
   return (
-    <div className="relative aspect-[16/10] w-full overflow-hidden border border-rule bg-bg-elev">
-      {showImage ? (
-        <Image
-          src={project.image as string}
-          alt={`Aperçu du projet ${project.title}`}
-          fill
-          sizes="(min-width: 768px) 40vw, 100vw"
-          className="object-cover"
-          onError={() => setImgError(true)}
-        />
-      ) : (
-        <div className="absolute inset-0 flex items-center justify-center">
-          <p className="text-center font-mono text-[11px] uppercase tracking-[0.14em] text-ink-faint">
-            {project.imageNote}
-          </p>
-        </div>
+    <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 font-mono text-[11px] uppercase tracking-[0.12em] md:text-xs">
+      {project.liveUrl && (
+        <a
+          href={project.liveUrl}
+          target="_blank"
+          rel="noreferrer"
+          className={linkClass}
+        >
+          <span aria-hidden className={arrow}>
+            ↗
+          </span>
+          Voir le projet
+        </a>
+      )}
+      {project.repoUrl && (
+        <a
+          href={project.repoUrl}
+          target="_blank"
+          rel="noreferrer"
+          className={linkClass}
+        >
+          <span aria-hidden className={arrow}>
+            ↗
+          </span>
+          Code
+        </a>
       )}
     </div>
   );
@@ -143,6 +208,8 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
               {project.stack}
             </p>
           )}
+
+          <ProjectLinks project={project} />
         </div>
 
         {/* Thumbnail */}
