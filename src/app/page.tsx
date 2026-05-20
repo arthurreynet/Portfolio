@@ -4,7 +4,7 @@ import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 import { Hero } from "@/components/Hero";
 import { Parcours } from "@/components/Parcours";
-import { SectionBreak } from "@/components/SectionBreak";
+import { ScrollToTop } from "@/components/ScrollToTop";
 import { SelectedWork } from "@/components/SelectedWork";
 
 export default function Home() {
@@ -13,16 +13,13 @@ export default function Home() {
       <main>
         <Hero />
         <About />
-        <SectionBreak />
         <SelectedWork />
-        <SectionBreak />
         <Parcours />
-        <SectionBreak />
         <Competences />
-        <SectionBreak />
         <Contact />
       </main>
       <Footer />
+      <ScrollToTop />
     </>
   );
 }

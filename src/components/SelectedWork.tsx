@@ -26,9 +26,9 @@ const PROJECTS: Project[] = [
     statusLabel: "Production · Anonymisé",
     isPreparation: false,
     stack: "Vue 2 / .NET FW → Next.js / .NET 8",
-    title: "Migration d'un portail client B2B",
+    title: "Migration d'un portail client",
     description:
-      "Refonte d'un portail B2B en production dans le secteur logistique. Migration complète de la stack legacy vers Next.js et .NET 8, montées de version majeures (React 18 → 19, Next 14 → 16, MUI 5 → 7), gains de perf et de maintenabilité. Du front à l'infra.",
+      "Refonte d'un portail client en production dans le secteur logistique (commandes B2B et B2C). Migration complète de la stack legacy vers Next.js et .NET 8, montées de version majeures (React 18 → 19, Next 14 → 16, MUI 5 → 7), gains de perf et de maintenabilité. Du front à l'infra.",
     image: null,
     imageNote: "Visuel anonymisé",
   },

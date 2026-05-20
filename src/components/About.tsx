@@ -68,7 +68,7 @@ export function About() {
               className="mt-8 text-base leading-[1.65] text-ink-mute md:text-lg"
             >
               Concrètement, j&apos;ai participé à la migration complète
-              d&apos;un portail client B2B — Vue 2 / .NET Framework vers Next.js
+              d&apos;un portail client — Vue 2 / .NET Framework vers Next.js
               / .NET 8 —, à des montées de version majeures (React 18 → 19,
               Next 14 → 16, MUI 5 → 7), et je tiens l&apos;infra autant que le
               front : Docker, self-hosting, CI/CD.
