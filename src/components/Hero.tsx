@@ -31,7 +31,7 @@ export function Hero() {
         {...rise(0.05)}
         className="flex items-center justify-between border-b border-rule pb-4 font-mono text-[11px] uppercase tracking-[0.12em] md:text-xs"
       >
-        <span className="text-ink-mute">Portfolio · 2026 · N°01</span>
+        <span className="text-ink-mute">Portfolio · 2026</span>
         <span className="text-ink-mute">
           Statut · <span className="text-accent">Disponible</span>
         </span>
