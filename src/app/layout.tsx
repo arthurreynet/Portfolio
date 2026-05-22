@@ -93,7 +93,7 @@ const personSchema = {
   },
   sameAs: [
     "https://github.com/arthurreynet",
-    "https://www.linkedin.com/in/arthur-reynet",
+    "https://www.linkedin.com/in/arthurreynet",
   ],
   knowsAbout: [
     "Next.js",

@@ -8,7 +8,7 @@ const EASE: Transition["ease"] = [0.2, 0, 0.2, 1];
 const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID ?? "";
 const EMAIL = "arthur.reynet@gmail.com";
 const GITHUB_URL = "https://github.com/arthurreynet";
-const LINKEDIN_URL = "https://www.linkedin.com/in/arthur-reynet";
+const LINKEDIN_URL = "https://www.linkedin.com/in/arthurreynet";
 const CV_URL = "/cv.pdf";
 
 type Status = "idle" | "submitting" | "success" | "error";
