@@ -23,7 +23,7 @@ type Project = {
 const PROJECTS: Project[] = [
   {
     number: "01",
-    year: "2024–2025",
+    year: "2024–2026",
     statusLabel: "Production · Anonymisé",
     isPreparation: false,
     stack: "Vue 2 / .NET FW → Next.js / .NET 8",
@@ -37,7 +37,7 @@ const PROJECTS: Project[] = [
   },
   {
     number: "02",
-    year: "2025",
+    year: "Avril 2026",
     statusLabel: "En ligne · Open source",
     isPreparation: false,
     stack: "Next.js · App Router · Tailwind",
