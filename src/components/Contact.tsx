@@ -5,7 +5,7 @@ import { motion, useReducedMotion, type Transition } from "motion/react";
 
 const EASE: Transition["ease"] = [0.2, 0, 0.2, 1];
 
-const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID ?? "";
+const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID ?? "mykvwrpn";
 const EMAIL = "arthur.reynet@gmail.com";
 const GITHUB_URL = "https://github.com/arthurreynet";
 const LINKEDIN_URL = "https://www.linkedin.com/in/arthur-reynet";
