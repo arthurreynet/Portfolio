@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Hanken_Grotesk, JetBrains_Mono } from "next/font/google";
+import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -21,9 +22,6 @@ const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
   display: "swap",
 });
-
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://arthurreynet.com";
 
 const DESCRIPTION =
   "Développeur full-stack — Next.js & .NET 8. Apprenti CDA, expérience de production réelle : migration de portail client, modernisation de stacks legacy, du front à l'infra. Disponible en freelance et pour un poste.";
