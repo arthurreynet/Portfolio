@@ -1,6 +1,7 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
+import { Moon, Sun, type LucideIcon } from "lucide-react";
 
 type Theme = "dark" | "light";
 
@@ -38,18 +39,20 @@ export function SiteHeader() {
   // déjà positionné avant peinture, le rendu serveur part du sombre.
   const theme = useSyncExternalStore(subscribeTheme, readTheme, () => "dark");
 
-  const segButton = (value: Theme, label: string) => (
+  // Icône seule : le libellé passe en aria-label, aria-pressed dit lequel est actif
+  const segButton = (value: Theme, label: string, Icon: LucideIcon) => (
     <button
       type="button"
       onClick={() => applyTheme(value)}
+      aria-label={label}
       aria-pressed={theme === value}
-      className={`cursor-pointer rounded-full px-3 py-1.5 text-[13px] font-semibold transition-colors ${
+      className={`grid size-8 cursor-pointer place-items-center rounded-full transition-colors ${
         theme === value
           ? "bg-accent text-accent-ink"
           : "text-text-dim hover:text-text"
       }`}
     >
-      {label}
+      <Icon size={16} strokeWidth={2} />
     </button>
   );
 
@@ -87,8 +90,8 @@ export function SiteHeader() {
               aria-label="Thème"
               className="inline-flex rounded-full border border-line-soft bg-bg-elev p-[3px]"
             >
-              {segButton("dark", "Sombre")}
-              {segButton("light", "Clair")}
+              {segButton("dark", "Thème sombre", Moon)}
+              {segButton("light", "Thème clair", Sun)}
             </div>
 
             <a

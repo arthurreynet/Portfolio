@@ -1,14 +1,41 @@
 "use client";
 
 import { motion, useReducedMotion, type Transition } from "motion/react";
+import {
+  Container,
+  Database,
+  MonitorSmartphone,
+  Server,
+  type LucideIcon,
+} from "lucide-react";
 
 const EASE: Transition["ease"] = [0.22, 0.61, 0.36, 1];
 
-const CHAIN: { name: string; index: string; stack: string }[] = [
-  { name: "Interface", index: "01", stack: "Next.js · React" },
-  { name: "Logique & API", index: "02", stack: "Node · .NET" },
-  { name: "Données", index: "03", stack: "PostgreSQL · Oracle · SQL Server" },
-  { name: "Déploiement", index: "04", stack: "Docker · CI/CD · mise en ligne" },
+const CHAIN: {
+  name: string;
+  index: string;
+  stack: string;
+  icon: LucideIcon;
+}[] = [
+  {
+    name: "Interface",
+    index: "01",
+    stack: "Next.js · React",
+    icon: MonitorSmartphone,
+  },
+  { name: "Logique & API", index: "02", stack: "Node · .NET", icon: Server },
+  {
+    name: "Données",
+    index: "03",
+    stack: "PostgreSQL · Oracle · SQL Server",
+    icon: Database,
+  },
+  {
+    name: "Déploiement",
+    index: "04",
+    stack: "Docker · CI/CD · mise en ligne",
+    icon: Container,
+  },
 ];
 
 export function Hero() {
@@ -89,7 +116,12 @@ export function Hero() {
                 className="absolute left-4 top-1/2 h-3.5 w-[3px] -translate-y-1/2 rounded-sm bg-line transition-[height,background-color,box-shadow] duration-250 group-hover:h-[26px] group-hover:bg-accent-glow group-hover:shadow-[0_0_12px_var(--halo)]"
               />
               <span className="flex items-baseline justify-between gap-3">
-                <span className="text-[17px] font-semibold transition-colors group-hover:text-accent-glow">
+                <span className="flex items-center gap-2.5 text-[17px] font-semibold transition-colors group-hover:text-accent-glow">
+                  <step.icon
+                    size={18}
+                    strokeWidth={2}
+                    className="shrink-0 self-center text-text-dim transition-colors group-hover:text-accent"
+                  />
                   {step.name}
                 </span>
                 <span className="text-[13px] font-medium text-text-dim">

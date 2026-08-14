@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { motion, useReducedMotion, type Transition } from "motion/react";
+import { ExternalLink } from "lucide-react";
 import { SectionHeader } from "./SectionHeader";
 
 const EASE: Transition["ease"] = [0.22, 0.61, 0.36, 1];
@@ -194,17 +195,19 @@ export function Contact() {
                 href={LINKEDIN_URL}
                 target="_blank"
                 rel="noreferrer"
-                className="text-sm font-semibold text-accent transition-colors hover:text-accent-glow focus-visible:text-accent-glow"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-accent transition-colors hover:text-accent-glow focus-visible:text-accent-glow"
               >
-                LinkedIn ↗
+                LinkedIn
+                <ExternalLink size={14} strokeWidth={2} />
               </a>
               <a
                 href={GITHUB_URL}
                 target="_blank"
                 rel="noreferrer"
-                className="text-sm font-semibold text-accent transition-colors hover:text-accent-glow focus-visible:text-accent-glow"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-accent transition-colors hover:text-accent-glow focus-visible:text-accent-glow"
               >
-                GitHub ↗
+                GitHub
+                <ExternalLink size={14} strokeWidth={2} />
               </a>
             </div>
           </motion.div>

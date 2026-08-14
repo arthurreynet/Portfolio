@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useReducedMotion } from "motion/react";
+import { ArrowUp } from "lucide-react";
 
 export function ScrollToTop() {
   const [visible, setVisible] = useState(false);
@@ -32,7 +33,7 @@ export function ScrollToTop() {
           : "pointer-events-none translate-y-2 opacity-0"
       }`}
     >
-      <span aria-hidden>↑</span>
+      <ArrowUp size={18} strokeWidth={2} />
     </button>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion, type Transition } from "motion/react";
+import { ExternalLink, MoveRight } from "lucide-react";
 import { SectionHeader } from "./SectionHeader";
 import { TiltFrame } from "./TiltFrame";
 
@@ -64,9 +65,7 @@ export function Travaux() {
 
           <p className="mb-6.5 inline-flex items-center gap-2.5 rounded-full border border-line-soft bg-bg-elev px-4 py-2 text-sm text-text-dim">
             <b className="font-semibold text-text">Vue 2 / .NET FW</b>
-            <span aria-hidden className="text-accent">
-              →
-            </span>
+            <MoveRight size={16} strokeWidth={2} className="text-accent" />
             <b className="font-semibold text-text">Next.js / .NET 8</b>
           </p>
 
@@ -156,17 +155,19 @@ export function Travaux() {
               href="https://regex-playground-one.vercel.app"
               target="_blank"
               rel="noreferrer"
-              className="text-[13px] font-semibold text-accent transition-colors hover:text-accent-glow focus-visible:text-accent-glow"
+              className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-accent transition-colors hover:text-accent-glow focus-visible:text-accent-glow"
             >
-              Voir le projet ↗
+              Voir le projet
+              <ExternalLink size={14} strokeWidth={2} />
             </a>
             <a
               href="https://github.com/arthurreynet/Regex-Playground"
               target="_blank"
               rel="noreferrer"
-              className="text-[13px] font-semibold text-accent transition-colors hover:text-accent-glow focus-visible:text-accent-glow"
+              className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-accent transition-colors hover:text-accent-glow focus-visible:text-accent-glow"
             >
-              Code ↗
+              Code
+              <ExternalLink size={14} strokeWidth={2} />
             </a>
           </div>
         </motion.li>
