@@ -2,14 +2,13 @@
 
 import { motion, useReducedMotion, type Transition } from "motion/react";
 
-const EASE: Transition["ease"] = [0.2, 0, 0.2, 1];
+const EASE: Transition["ease"] = [0.22, 0.61, 0.36, 1];
 
-const FACTS: { label: string; value: string }[] = [
-  { label: "Rôle", value: "Développeur full-stack" },
-  { label: "Stack", value: "Next.js · .NET 8" },
-  { label: "Formation", value: "Bachelor CDA — CESI Rouen" },
-  { label: "Basé à", value: "Rouen, France" },
-  { label: "Langues", value: "Français · Anglais technique" },
+const CHAIN: { name: string; index: string; stack: string }[] = [
+  { name: "Interface", index: "01", stack: "Next.js · React" },
+  { name: "Logique & API", index: "02", stack: "Node · .NET" },
+  { name: "Données", index: "03", stack: "PostgreSQL · Oracle · SQL Server" },
+  { name: "Déploiement", index: "04", stack: "Docker · CI/CD · mise en ligne" },
 ];
 
 export function Hero() {
@@ -25,88 +24,84 @@ export function Hero() {
     <section
       id="hero"
       aria-labelledby="hero-title"
-      className="flex min-h-screen flex-col px-6 py-8 md:px-12 md:py-10"
+      className="mx-auto grid w-full max-w-page items-center gap-11 px-5 pb-16 pt-15 sm:px-7 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16 lg:pb-24 lg:pt-18"
     >
-      {/* Top editorial strip */}
-      <motion.header
-        {...rise(0.05)}
-        className="flex items-center justify-between border-b border-rule pb-4 font-mono text-[11px] uppercase tracking-[0.12em] md:text-xs"
-      >
-        <span className="text-ink-mute">Portfolio · 2026</span>
-        <span className="text-ink-mute">
-          Statut · <span className="text-accent">Disponible</span>
-        </span>
-      </motion.header>
-
-      {/* Hero masthead — text left, fact index right */}
-      <div className="mx-auto grid w-full max-w-6xl flex-1 grid-cols-1 items-center gap-12 pt-16 lg:grid-cols-12 lg:gap-16 lg:pt-24">
-        {/* Text column */}
-        <div className="lg:col-span-7">
-          <motion.h1
-            {...rise(0.2)}
-            id="hero-title"
-            className="font-display font-medium leading-[0.92] text-ink"
-            style={{
-              fontSize: "var(--text-display)",
-              letterSpacing: "var(--tracking-display)",
-              fontVariationSettings: '"opsz" 144, "SOFT" 50',
-            }}
-          >
-            Arthur Reynet
-          </motion.h1>
-
-          <motion.p
-            {...rise(0.4)}
-            className="mt-6 max-w-2xl text-lg leading-snug text-ink md:mt-8 md:text-2xl"
-          >
-            Développeur full-stack — Next.js &amp; .NET 8.
-          </motion.p>
-
-          <motion.p
-            {...rise(0.55)}
-            className="mt-6 max-w-xl text-base leading-relaxed text-ink-mute md:mt-8 md:text-lg"
-          >
-            Apprenti CDA en alternance, équipe IT d&apos;une entreprise de
-            logistique. J&apos;interviens sur des applications en production —
-            refontes de stacks legacy, du front à l&apos;infra.
-          </motion.p>
-        </div>
-
-        {/* Fact index — editorial masthead */}
-        <motion.dl
-          {...rise(0.45)}
-          className="max-w-md lg:col-span-4 lg:col-start-9 lg:max-w-none"
+      <div>
+        <motion.p
+          {...rise(0.05)}
+          className="mb-6 flex items-center gap-2.5 text-[13px] font-semibold uppercase tracking-[0.08em] text-accent"
         >
-          {FACTS.map((fact) => (
-            <div
-              key={fact.label}
-              className="grid grid-cols-[6rem_1fr] items-baseline gap-3 border-t border-rule py-3 font-mono text-[11px] uppercase tracking-[0.12em]"
-            >
-              <dt className="text-ink-faint">{fact.label}</dt>
-              <dd className="text-ink">{fact.value}</dd>
-            </div>
-          ))}
-        </motion.dl>
+          <span aria-hidden className="h-px w-[22px] bg-accent/70" />
+          Développeur full-stack · Freelance · Rouen
+        </motion.p>
+
+        <motion.h1
+          {...rise(0.15)}
+          id="hero-title"
+          className="mb-6 text-[clamp(2.6rem,5.6vw,4.3rem)] font-extrabold leading-[1.04] tracking-tight"
+        >
+          Je conçois, développe et{" "}
+          <span className="text-accent">déploie</span> vos applications web.
+        </motion.h1>
+
+        <motion.p
+          {...rise(0.28)}
+          className="mb-9 max-w-[40ch] text-[clamp(1.05rem,1.5vw,1.22rem)] text-text-muted"
+        >
+          Connecteurs, applications métier, migrations. De la première ligne de
+          code jusqu&apos;à la mise en production.
+        </motion.p>
+
+        <motion.div
+          {...rise(0.4)}
+          className="flex flex-wrap items-center gap-3.5 max-[480px]:w-full"
+        >
+          <a
+            href="#services"
+            className="rounded-full bg-text px-6 py-3.5 text-base font-semibold text-bg transition-[transform,opacity] hover:-translate-y-px hover:opacity-90 focus-visible:-translate-y-px focus-visible:opacity-90 max-[480px]:flex-1 max-[480px]:text-center"
+          >
+            Ce que je fais
+          </a>
+          <a
+            href="#contact"
+            className="rounded-full border border-line px-6 py-3.5 text-base font-medium transition-colors hover:border-accent hover:text-accent focus-visible:border-accent focus-visible:text-accent max-[480px]:flex-1 max-[480px]:text-center"
+          >
+            Discuter d&apos;un projet
+          </a>
+        </motion.div>
       </div>
 
-      {/* Bottom scroll cue */}
       <motion.div
-        {...rise(0.75)}
-        className="flex items-center justify-between border-t border-rule pt-4 font-mono text-[11px] uppercase tracking-[0.12em] text-ink-mute md:text-xs"
+        {...rise(0.35)}
+        className="rounded-card border border-line-soft bg-bg-elev p-3"
       >
-        <a
-          href="#a-propos"
-          className="group inline-flex items-center gap-2 transition-colors hover:text-accent focus-visible:text-accent"
-        >
-          <span
-            aria-hidden
-            className="inline-block transition-transform duration-300 group-hover:translate-y-0.5"
-          >
-            ↓
-          </span>
-          Continuer
-        </a>
-        <span>Rouen, FR</span>
+        <p className="px-3.5 pb-4 pt-3 text-xs font-semibold uppercase tracking-[0.06em] text-text-dim">
+          La chaîne complète
+        </p>
+        <ul aria-label="Ce que je couvre, de l'interface au déploiement">
+          {CHAIN.map((step) => (
+            <li
+              key={step.index}
+              className="group relative rounded-[10px] py-4 pl-[30px] pr-4 transition-colors hover:bg-surface"
+            >
+              <span
+                aria-hidden
+                className="absolute left-4 top-1/2 h-3.5 w-[3px] -translate-y-1/2 rounded-sm bg-line transition-[height,background-color,box-shadow] duration-250 group-hover:h-[26px] group-hover:bg-accent-glow group-hover:shadow-[0_0_12px_var(--halo)]"
+              />
+              <span className="flex items-baseline justify-between gap-3">
+                <span className="text-[17px] font-semibold transition-colors group-hover:text-accent-glow">
+                  {step.name}
+                </span>
+                <span className="text-[13px] font-medium text-text-dim">
+                  {step.index}
+                </span>
+              </span>
+              <span className="mt-1 block text-sm text-text-dim opacity-55 transition-[opacity,color,transform] group-hover:translate-x-0.5 group-hover:text-text-muted group-hover:opacity-100">
+                {step.stack}
+              </span>
+            </li>
+          ))}
+        </ul>
       </motion.div>
     </section>
   );
