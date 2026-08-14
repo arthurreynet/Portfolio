@@ -4,6 +4,7 @@ import { Hero } from "@/components/Hero";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { Services } from "@/components/Services";
 import { SiteHeader } from "@/components/SiteHeader";
+import { Travaux } from "@/components/Travaux";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <main id="contenu">
         <Hero />
         <Services />
+        <Travaux />
         <Contact />
       </main>
       <Footer />
