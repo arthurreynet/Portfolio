@@ -1,8 +1,30 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 
 type Theme = "dark" | "light";
+
+function readTheme(): Theme {
+  return document.body.dataset.theme === "light" ? "light" : "dark";
+}
+
+function subscribeTheme(onChange: () => void) {
+  const observer = new MutationObserver(onChange);
+  observer.observe(document.body, {
+    attributes: true,
+    attributeFilter: ["data-theme"],
+  });
+  return () => observer.disconnect();
+}
+
+function applyTheme(next: Theme) {
+  document.body.dataset.theme = next;
+  try {
+    localStorage.setItem("theme", next);
+  } catch {
+    // stockage indisponible (navigation privée) — le choix vaut pour la session
+  }
+}
 
 const LINKS: { href: string; label: string }[] = [
   { href: "#services", label: "Services" },
@@ -12,28 +34,14 @@ const LINKS: { href: string; label: string }[] = [
 ];
 
 export function SiteHeader() {
-  // Le rendu serveur part du sombre ; le script inline du layout a déjà pu
-  // appliquer le choix stocké, on se resynchronise après hydratation.
-  const [theme, setTheme] = useState<Theme>("dark");
-
-  useEffect(() => {
-    setTheme(document.body.dataset.theme === "light" ? "light" : "dark");
-  }, []);
-
-  function apply(next: Theme) {
-    document.body.dataset.theme = next;
-    setTheme(next);
-    try {
-      localStorage.setItem("theme", next);
-    } catch {
-      // stockage indisponible (navigation privée) — le choix vaut pour la session
-    }
-  }
+  // L'attribut data-theme du body fait foi : le script inline du layout l'a
+  // déjà positionné avant peinture, le rendu serveur part du sombre.
+  const theme = useSyncExternalStore(subscribeTheme, readTheme, () => "dark");
 
   const segButton = (value: Theme, label: string) => (
     <button
       type="button"
-      onClick={() => apply(value)}
+      onClick={() => applyTheme(value)}
       aria-pressed={theme === value}
       className={`cursor-pointer rounded-full px-3 py-1.5 text-[13px] font-semibold transition-colors ${
         theme === value

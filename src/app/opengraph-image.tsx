@@ -101,11 +101,14 @@ export default async function OpengraphImage() {
           style={{
             ...stripStyle,
             color: "#6B7367",
+            fontSize: "18px",
             borderTop: "1px solid #222923",
             paddingTop: "24px",
           }}
         >
-          <div style={{ display: "flex" }}>{META_BOT_L}</div>
+          <div style={{ display: "flex", whiteSpace: "nowrap" }}>
+            {META_BOT_L}
+          </div>
           <div style={{ display: "flex" }}>{META_BOT_R}</div>
         </div>
       </div>
