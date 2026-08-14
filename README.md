@@ -23,7 +23,6 @@ Site vitrine d'un développeur full-stack freelance. Il s'adresse aux entreprise
 - **Deux thèmes** : sombre par défaut, clair au choix, restauré avant peinture pour éviter le flash
 - **Accessibilité** : contraste WCAG AA sur les deux thèmes, hiérarchie de titres, landmarks ARIA, skip-link, navigation clavier, `prefers-reduced-motion`
 - **SEO** : metadata complète, OG image générée à la volée, JSON-LD Person, `sitemap.xml`, `robots.txt`
-- **Easter egg** : le jeu du dinosaure de Chrome, version maison, dans le footer
 - 100 % statique, optimisé pour Lighthouse 95+
 
 ## Développement local
@@ -67,7 +66,7 @@ src/
 │  ├─ icon.tsx             Favicon monogramme
 │  ├─ sitemap.ts / robots.ts
 └─ components/             SiteHeader, Hero, Services, Travaux, TiltFrame,
-                           Methode, Recommandations, Contact, Footer, DinoGame…
+                           Methode, Recommandations, Contact, Footer…
 public/projets/            Visuels des projets
 ```
 
