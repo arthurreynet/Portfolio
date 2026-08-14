@@ -12,7 +12,7 @@
   --color-line-soft:   oklch(27.2% 0.015 149.3);  /* #222923 */
   --color-text:        oklch(94.3% 0.009 113.2);  /* #ECEDE6 */
   --color-text-muted:  oklch(67.9% 0.023 130.1);  /* #939B8C */
-  --color-text-dim:    oklch(54.5% 0.021 135.0);  /* #6B7367 */
+  --color-text-dim:    oklch(61.4% 0.021 135.0);  /* #7F887B — éclairci depuis #6B7367 pour AA sur surface */
   --color-accent:      oklch(74.0% 0.094 136.9);  /* #8FB97E */
   --color-accent-glow: oklch(84.3% 0.103 135.4);  /* #AEDB97 */
   --color-accent-ink:  oklch(18.2% 0.007 164.0);
@@ -55,12 +55,12 @@ body[data-theme="light"] {
   --color-line-soft:   oklch(92.7% 0.014 128.6);  /* #E4E9DF */
   --color-text:        oklch(21.1% 0.013 135.1);  /* #161A14 */
   --color-text-muted:  oklch(47.8% 0.021 135.1);  /* #586054 */
-  --color-text-dim:    oklch(64.6% 0.027 122.2);  /* #8B917F */
-  --color-accent:      oklch(56.4% 0.111 135.8);  /* #57843F */
+  --color-text-dim:    oklch(52.5% 0.027 122.2);  /* #676D5C — assombri depuis #8B917F pour AA sur surface */
+  --color-accent:      oklch(53.2% 0.111 135.8);  /* #4E7A35 — assombri depuis #57843F pour AA, texte et fond de bouton */
   --color-accent-glow: oklch(47.8% 0.103 137.4);  /* #3F6A2D */
   --color-accent-ink:  oklch(100%  0     0);
 
-  --halo: oklch(56.4% 0.111 135.8 / 0.12);
+  --halo: oklch(53.2% 0.111 135.8 / 0.12);
   --glass: oklch(96.3% 0.007 132.4 / 0.66);
 }
 

@@ -68,7 +68,7 @@ export function Contact() {
 
   const labelClass = "block text-[13px] font-semibold text-text-muted";
   const inputClass =
-    "mt-2 w-full rounded-[10px] border border-line-soft bg-bg-elev px-3.5 py-3 text-base text-text outline-none transition-colors focus:border-accent placeholder:text-text-dim";
+    "mt-2 w-full rounded-[10px] border border-line bg-bg-elev px-3.5 py-3 text-base text-text outline-none transition-colors focus:border-accent placeholder:text-text-dim";
 
   return (
     <section
