@@ -59,9 +59,11 @@ export function SiteHeader() {
         <nav className="flex flex-wrap items-center justify-between gap-3.5 py-3.5">
           <span className="flex items-center gap-2.5 text-[18px] font-bold tracking-[-0.01em]">
             <span className="relative size-2.5 rounded-full bg-accent shadow-[0_0_10px_var(--halo)]">
+              {/* Centrage porté par les keyframes : pas d'utilitaire translate
+                  ici, il s'ajouterait au transform de l'animation */}
               <span
                 aria-hidden
-                className="absolute left-1/2 top-1/2 size-full -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent animate-ping-soft"
+                className="absolute left-1/2 top-1/2 size-full rounded-full bg-accent animate-ping-soft"
               />
             </span>
             Arthur Reynet
