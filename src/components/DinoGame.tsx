@@ -89,13 +89,24 @@ export function DinoGame() {
     const canvas: HTMLCanvasElement = el;
     const ctx: CanvasRenderingContext2D = context;
 
-    const cs = getComputedStyle(document.documentElement);
-    game.current.colors = {
-      ink: cs.getPropertyValue("--ink").trim() || "#222",
-      accent: cs.getPropertyValue("--accent").trim() || "#b5502f",
-      rule: cs.getPropertyValue("--rule").trim() || "#ddd",
-      faint: cs.getPropertyValue("--ink-faint").trim() || "#999",
-    };
+    // Lu sur <body> : c'est lui qui porte les surcharges du thème clair
+    function readColors() {
+      const cs = getComputedStyle(document.body);
+      game.current.colors = {
+        ink: cs.getPropertyValue("--color-text").trim() || "#ECEDE6",
+        accent: cs.getPropertyValue("--color-accent").trim() || "#8FB97E",
+        rule: cs.getPropertyValue("--color-line").trim() || "#2A322A",
+        faint: cs.getPropertyValue("--color-text-dim").trim() || "#6B7367",
+      };
+    }
+    readColors();
+
+    // Le sélecteur de thème repeint le body : on relit la palette
+    const themeWatcher = new MutationObserver(readColors);
+    themeWatcher.observe(document.body, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
 
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     const groundY = CANVAS_H - GROUND_OFFSET;
@@ -188,6 +199,7 @@ export function DinoGame() {
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", resize);
+      themeWatcher.disconnect();
     };
   }, []);
 
@@ -199,8 +211,8 @@ export function DinoGame() {
   }
 
   return (
-    <div className="px-6 md:px-12">
-      <div className="mx-auto max-w-6xl py-6">
+    <div className="px-5 sm:px-7">
+      <div className="mx-auto w-full max-w-page py-6">
         <div
           role="button"
           tabIndex={0}
@@ -221,7 +233,7 @@ export function DinoGame() {
           {/* Idle / over overlays */}
           {phase !== "running" && (
             <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-              <p className="text-center font-mono text-[11px] uppercase tracking-[0.14em] text-ink-mute md:text-xs">
+              <p className="text-center text-[11px] font-medium uppercase tracking-[0.14em] text-text-muted md:text-xs">
                 {phase === "idle" ? (
                   <>
                     <span className="text-accent">Hors ligne</span> — espace
@@ -239,7 +251,7 @@ export function DinoGame() {
         </div>
 
         {/* Caption row */}
-        <div className="mt-3 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.12em] text-ink-faint md:text-[11px]">
+        <div className="mt-3 flex items-center justify-between text-[10px] font-medium uppercase tracking-[0.12em] text-text-dim md:text-[11px]">
           <span>Le dino de Chrome, version maison</span>
           <span>
             Score {String(score).padStart(3, "0")} · Best{" "}
