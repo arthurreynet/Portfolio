@@ -1,122 +1,101 @@
 @import "tailwindcss";
 
 /* ─────────────────────────────────────────────
-   Design tokens — OKLCH, warm cream + terracotta
+   Design tokens — vert profond + accent vert clair
+   Thème sombre par défaut, clair via body[data-theme="light"]
    ───────────────────────────────────────────── */
-:root {
-  /* Surfaces — warm off-white, never pure */
-  --bg: oklch(0.97 0.015 85);
-  --bg-elev: oklch(0.95 0.018 85);
+@theme {
+  --color-bg:          oklch(18.2% 0.007 164.0);  /* #0F1311 */
+  --color-bg-elev:     oklch(21.1% 0.011 151.2);  /* #151A16 */
+  --color-surface:     oklch(23.6% 0.013 150.0);  /* #1A201B */
+  --color-line:        oklch(30.7% 0.018 145.1);  /* #2A322A */
+  --color-line-soft:   oklch(27.2% 0.015 149.3);  /* #222923 */
+  --color-text:        oklch(94.3% 0.009 113.2);  /* #ECEDE6 */
+  --color-text-muted:  oklch(67.9% 0.023 130.1);  /* #939B8C */
+  --color-text-dim:    oklch(54.5% 0.021 135.0);  /* #6B7367 */
+  --color-accent:      oklch(74.0% 0.094 136.9);  /* #8FB97E */
+  --color-accent-glow: oklch(84.3% 0.103 135.4);  /* #AEDB97 */
+  --color-accent-ink:  oklch(18.2% 0.007 164.0);
 
-  /* Ink — warm near-black, never pure */
-  --ink: oklch(0.22 0.015 50);
-  --ink-mute: oklch(0.45 0.012 50);
-  --ink-faint: oklch(0.52 0.012 50);
+  /* Typographie — un seul grotesque */
+  --font-sans: var(--font-schibsted), system-ui, -apple-system, "Segoe UI", sans-serif;
 
-  /* Hairline rules / borders */
-  --rule: oklch(0.88 0.012 70);
-  --rule-strong: oklch(0.78 0.012 70);
-
-  /* Accent — terracotta, used sparingly */
-  --accent: oklch(0.55 0.13 38);
-  --accent-soft: oklch(0.55 0.13 38 / 0.12);
-  --accent-deep: oklch(0.45 0.13 38);
-
-  /* Typography stacks (next/font variables resolved by layout) */
-  --font-display-stack: var(--font-fraunces), "Iowan Old Style", "Palatino Linotype", "URW Palladio L", P052, serif;
-  --font-body-stack: var(--font-hanken), -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-  --font-mono-stack: var(--font-jetbrains), ui-monospace, "SFMono-Regular", Menlo, monospace;
+  /* Formes et rythme */
+  --radius-card: 14px;
+  --container-page: 1180px;
+  --ease-brand: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
-/* Tailwind v4 — expose tokens as utility classes */
-@theme inline {
-  /* Colors */
-  --color-bg: var(--bg);
-  --color-bg-elev: var(--bg-elev);
-  --color-ink: var(--ink);
-  --color-ink-mute: var(--ink-mute);
-  --color-ink-faint: var(--ink-faint);
-  --color-rule: var(--rule);
-  --color-rule-strong: var(--rule-strong);
-  --color-accent: var(--accent);
-  --color-accent-soft: var(--accent-soft);
-  --color-accent-deep: var(--accent-deep);
+/* Tokens non exposés en utilitaires (halos, verre dépoli) */
+:root {
+  --halo: oklch(74.0% 0.094 136.9 / 0.14);
+  --glass: oklch(18.2% 0.007 164.0 / 0.62);
+}
 
-  /* Font families */
-  --font-display: var(--font-display-stack);
-  --font-body: var(--font-body-stack);
-  --font-mono: var(--font-mono-stack);
+body[data-theme="light"] {
+  --color-bg:          oklch(96.3% 0.007 132.4);  /* #F1F4EF */
+  --color-bg-elev:     oklch(100%  0     0);
+  --color-surface:     oklch(94.0% 0.013 130.8);  /* #E8EDE4 */
+  --color-line:        oklch(89.8% 0.017 133.8);  /* #D9E0D5 */
+  --color-line-soft:   oklch(92.7% 0.014 128.6);  /* #E4E9DF */
+  --color-text:        oklch(21.1% 0.013 135.1);  /* #161A14 */
+  --color-text-muted:  oklch(47.8% 0.021 135.1);  /* #586054 */
+  --color-text-dim:    oklch(64.6% 0.027 122.2);  /* #8B917F */
+  --color-accent:      oklch(56.4% 0.111 135.8);  /* #57843F */
+  --color-accent-glow: oklch(47.8% 0.103 137.4);  /* #3F6A2D */
+  --color-accent-ink:  oklch(100%  0     0);
 
-  /* Type scale — 1.333 ratio, modular */
-  --text-xs: 0.75rem;        /* 12 */
-  --text-sm: 0.875rem;       /* 14 */
-  --text-base: 1rem;         /* 16 */
-  --text-lg: 1.125rem;       /* 18 */
-  --text-xl: 1.333rem;       /* 21 */
-  --text-2xl: 1.777rem;      /* 28 */
-  --text-3xl: 2.369rem;      /* 38 */
-  --text-4xl: 3.157rem;      /* 51 */
-  --text-5xl: 4.209rem;      /* 67 */
-  --text-6xl: 5.61rem;       /* 90 */
-  --text-display: clamp(2.8rem, 9vw, 7.5rem);
-
-  /* Tracking — tight on display, normal on body, wider on mono caps */
-  --tracking-display: -0.025em;
-  --tracking-mono-caps: 0.08em;
-
-  /* Container */
-  --container-narrow: 64ch;
-  --container-prose: 70ch;
+  --halo: oklch(56.4% 0.111 135.8 / 0.12);
+  --glass: oklch(96.3% 0.007 132.4 / 0.66);
 }
 
 /* ─────────────────────────────────────────────
-   Base — typography, focus, selection
+   Base — typographie, focus, sélection
    ───────────────────────────────────────────── */
 html {
   -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
   font-feature-settings: "kern", "liga", "calt";
 }
 
 body {
-  font-family: var(--font-body);
+  font-family: var(--font-sans);
   font-size: 1rem;
-  line-height: 1.6;
+  line-height: 1.5;
   text-rendering: optimizeLegibility;
+  transition:
+    background-color 0.4s var(--ease-brand),
+    color 0.4s var(--ease-brand);
+}
+
+/* Ancres : compenser le header collant */
+section[id] {
+  scroll-margin-top: 88px;
 }
 
 ::selection {
-  background: var(--accent-soft);
-  color: var(--accent-deep);
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--color-accent);
   outline-offset: 3px;
-  border-radius: 1px;
+  border-radius: 2px;
 }
 
-/* Hairline default for hr */
 hr {
   border: 0;
-  border-top: 1px solid var(--rule);
+  border-top: 1px solid var(--color-line-soft);
   margin: 0;
 }
 
-/* Editorial drop cap — Fraunces display italic */
-.dropcap::first-letter {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-weight: 500;
-  font-size: 4.2em;
-  line-height: 0.82;
-  float: left;
-  margin: 0.06em 0.08em 0 -0.04em;
-  color: var(--ink);
-  font-variation-settings: "opsz" 144, "SOFT" 30;
-}
-
-/* Reduced motion — kill all transitions */
+/* Reduced motion — on coupe tout */
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   *,
   *::before,
   *::after {
