@@ -4,17 +4,16 @@ export const alt = "Arthur Reynet — Développeur full-stack";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-// Card text — kept as literals (incl. uppercase) so each font subset
-// requested below covers exactly the glyphs it renders (no fallback mixing).
+// Textes gardés en littéraux (majuscules comprises) pour que chaque sous-
+// ensemble de police demandé ci-dessous couvre exactement les glyphes qu'il
+// rend — sinon les fontes se mélangent sur les caractères manquants.
 const NAME = "Arthur Reynet";
-const TAGLINE = "Développeur full-stack — Next.js & .NET 8";
-const META_TOP_L = "PORTFOLIO · 2026";
-const META_STATUT = "STATUT ·";
-const META_DISPO = "DISPONIBLE";
-const META_BOT_L = "ROUEN, FRANCE";
-const META_BOT_R = "APPRENTI CDA";
+const TAGLINE = "Connecteurs, applications métier, migrations.";
+const META_TOP = "DÉVELOPPEUR FULL-STACK · FREELANCE · ROUEN";
+const META_BOT_L = "DE LA PREMIÈRE LIGNE DE CODE JUSQU'À LA MISE EN PRODUCTION";
+const META_BOT_R = "ARTHURREYNET.DEV";
 
-const MONO_TEXT = META_TOP_L + META_STATUT + META_DISPO + META_BOT_L + META_BOT_R;
+const META_TEXT = META_TOP + META_BOT_L + META_BOT_R;
 
 async function loadGoogleFont(
   family: string,
@@ -30,20 +29,20 @@ async function loadGoogleFont(
 }
 
 export default async function OpengraphImage() {
-  const [fraunces, mono, hanken] = await Promise.all([
-    loadGoogleFont("Fraunces:opsz,wght@9..144,500", NAME),
-    loadGoogleFont("JetBrains+Mono:wght@400", MONO_TEXT),
-    loadGoogleFont("Hanken+Grotesk:wght@400", TAGLINE),
+  const [bold, regular, medium] = await Promise.all([
+    loadGoogleFont("Schibsted+Grotesk:wght@800", NAME),
+    loadGoogleFont("Schibsted+Grotesk:wght@400", TAGLINE),
+    loadGoogleFont("Schibsted+Grotesk:wght@600", META_TEXT),
   ]);
 
   const stripStyle = {
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    fontFamily: "JetBrains Mono",
-    fontSize: "22px",
-    letterSpacing: "3px",
-    color: "#5b534f",
+    fontFamily: "Schibsted Meta",
+    fontSize: "21px",
+    letterSpacing: "2px",
+    color: "#939B8C",
   } as const;
 
   return new ImageResponse(
@@ -55,35 +54,32 @@ export default async function OpengraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          backgroundColor: "#faf5ea",
+          backgroundColor: "#0F1311",
           padding: "60px 72px",
-          fontFamily: "Hanken Grotesk",
+          fontFamily: "Schibsted Body",
         }}
       >
-        {/* Top strip */}
+        {/* Bandeau haut */}
         <div
           style={{
             ...stripStyle,
-            borderBottom: "1px solid #bcb6af",
+            color: "#8FB97E",
+            borderBottom: "1px solid #222923",
             paddingBottom: "24px",
           }}
         >
-          <div style={{ display: "flex" }}>{META_TOP_L}</div>
-          <div style={{ display: "flex", gap: "10px" }}>
-            <span>{META_STATUT}</span>
-            <span style={{ color: "#af5234" }}>{META_DISPO}</span>
-          </div>
+          <div style={{ display: "flex" }}>{META_TOP}</div>
         </div>
 
-        {/* Name + tagline */}
+        {/* Nom + accroche */}
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div
             style={{
-              fontFamily: "Fraunces",
-              fontSize: "150px",
+              fontFamily: "Schibsted Display",
+              fontSize: "132px",
               lineHeight: 1,
-              letterSpacing: "-3px",
-              color: "#211914",
+              letterSpacing: "-4px",
+              color: "#ECEDE6",
             }}
           >
             {NAME}
@@ -93,19 +89,19 @@ export default async function OpengraphImage() {
               display: "flex",
               marginTop: "28px",
               fontSize: "36px",
-              color: "#5b534f",
+              color: "#939B8C",
             }}
           >
             {TAGLINE}
           </div>
         </div>
 
-        {/* Bottom strip */}
+        {/* Bandeau bas */}
         <div
           style={{
             ...stripStyle,
-            color: "#6f6763",
-            borderTop: "1px solid #bcb6af",
+            color: "#6B7367",
+            borderTop: "1px solid #222923",
             paddingTop: "24px",
           }}
         >
@@ -117,9 +113,9 @@ export default async function OpengraphImage() {
     {
       ...size,
       fonts: [
-        { name: "Fraunces", data: fraunces, style: "normal", weight: 500 },
-        { name: "JetBrains Mono", data: mono, style: "normal", weight: 400 },
-        { name: "Hanken Grotesk", data: hanken, style: "normal", weight: 400 },
+        { name: "Schibsted Display", data: bold, style: "normal", weight: 800 },
+        { name: "Schibsted Body", data: regular, style: "normal", weight: 400 },
+        { name: "Schibsted Meta", data: medium, style: "normal", weight: 600 },
       ],
     },
   );

@@ -1,4 +1,4 @@
-const DEFAULT_SITE_URL = "https://arthurreynet.com";
+const DEFAULT_SITE_URL = "https://www.arthurreynet.dev";
 
 /**
  * Resolves the public site URL from NEXT_PUBLIC_SITE_URL.
