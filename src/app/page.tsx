@@ -1,21 +1,23 @@
-import { About } from "@/components/About";
-import { Competences } from "@/components/Competences";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 import { Hero } from "@/components/Hero";
-import { Parcours } from "@/components/Parcours";
+import { Methode } from "@/components/Methode";
+import { Recommandations } from "@/components/Recommandations";
 import { ScrollToTop } from "@/components/ScrollToTop";
-import { SelectedWork } from "@/components/SelectedWork";
+import { Services } from "@/components/Services";
+import { SiteHeader } from "@/components/SiteHeader";
+import { Travaux } from "@/components/Travaux";
 
 export default function Home() {
   return (
     <>
+      <SiteHeader />
       <main id="contenu">
         <Hero />
-        <About />
-        <SelectedWork />
-        <Parcours />
-        <Competences />
+        <Services />
+        <Travaux />
+        <Methode />
+        <Recommandations />
         <Contact />
       </main>
       <Footer />

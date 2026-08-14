@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useReducedMotion } from "motion/react";
+import { ArrowUp } from "lucide-react";
 
 export function ScrollToTop() {
   const [visible, setVisible] = useState(false);
@@ -26,13 +27,13 @@ export function ScrollToTop() {
       onClick={toTop}
       aria-label="Remonter en haut de la page"
       tabIndex={visible ? 0 : -1}
-      className={`fixed bottom-5 right-5 z-50 flex size-11 items-center justify-center border border-rule-strong bg-bg font-mono text-base text-ink transition-all duration-300 hover:border-accent hover:text-accent focus-visible:border-accent focus-visible:text-accent md:bottom-6 md:right-6 ${
+      className={`fixed bottom-5 right-5 z-50 flex size-11 cursor-pointer items-center justify-center rounded-full border border-line bg-bg-elev text-base text-text transition-all duration-300 hover:border-accent hover:text-accent focus-visible:border-accent focus-visible:text-accent md:bottom-6 md:right-6 ${
         visible
           ? "translate-y-0 opacity-100"
           : "pointer-events-none translate-y-2 opacity-0"
       }`}
     >
-      <span aria-hidden>↑</span>
+      <ArrowUp size={18} strokeWidth={2} />
     </button>
   );
 }

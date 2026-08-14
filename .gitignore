@@ -43,3 +43,7 @@ next-env.d.ts
 
 # editor / agent tooling (machine-specific)
 .claude/
+
+# documents de travail internes (non publiés)
+/docs/
+/REFONTE-BRIEF.md
